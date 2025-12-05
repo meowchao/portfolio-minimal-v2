@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>spikey@terminal:~$</title>
+    </head>
+
+    <body>
+        <!-- Splash Screen -->
+        <div class="splash-screen">
+            <div class="splash-content">
+                <span class="prompt-symbol">spikey@terminal:~$</span>
+                <span id="typewriter"></span>
+                <span class="terminal-cursor"></span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="prompt">
+                <span class="prompt-symbol">spikey@terminal:~$</span>
+                <span class="command">./welcome.sh</span>
+            </div>
+
+            <div class="output">
+                <!-- Welcome Section -->
+                <div id="welcome" class="section active">
+                    <div class="welcome-screen">
+                        <h1>SPIKEY'S TERMINAL</h1>
+                        <div class="quote">
+                            "Only wimps use tape backup. REAL men just upload
+                            their important stuff on ftp and let the rest of the
+                            world mirror it."<br />— Linus Torvalds
+                        </div>
+                        <div class="ascii-art">
+                            <pre></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav">
+                    <span class="nav-item" onclick="showSection('about')"
+                        >[a] about</span
+                    >
+                    <span class="nav-item" onclick="showSection('projects')"
+                        >[p] projects</span
+                    >
+                    <span class="nav-item" onclick="showSection('links')"
+                        >[l] links</span
+                    >
+                    <span class="nav-item" onclick="showSection('blogs')"
+                        >[b] blogs</span
+                    >
+                    <span class="nav-item" onclick="showSection('notes')"
+                        >[n] leave note</span
+                    >
+                    <span class="nav-item" onclick="showSection('welcome')"
+                        >[q] home</span
+                    >
+                </nav>
+
+                <!-- About Section -->
+                <div id="about" class="section">
+                    <h1>ABOUT_ME</h1>
+                    <div class="info-grid">
+                        <div class="info-label">name:</div>
+                        <div class="info-value">pranav (spikeypear)</div>
+
+                        <div class="info-label">os:</div>
+                        <div class="info-value">Arch Linux (BTW)</div>
+
+                        <div class="info-label">shell:</div>
+                        <div class="info-value">bash</div>
+
+                        <div class="info-label">editor:</div>
+                        <div class="info-value">
+                            Zeditor + Neovim(for config files)
+                        </div>
+
+                        <div class="info-label">languages:</div>
+                        <div class="info-value">python, bash, go.</div>
+
+                        <div class="info-label">tools:</div>
+                        <div class="info-value">git, tmux, freecad, kicad</div>
+
+                        <div class="info-label">interests:</div>
+                        <div class="info-value">
+                            Linux, Raspberry Pi, Arduino, bash-scripting.
+                        </div>
+
+                        <div class="info-label">education:</div>
+                        <div class="info-value">
+                            VIT Vellore Electronics and Instrumentation
+                            Engineering
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; color: #ccc">
+                        I’m Pranav, a B.Tech student with a thing for computers,
+                        electronics, and building stuff that actually works. I
+                        love diving into tech, experimenting with hardware, and
+                        creating clean, functional software. Most of my time
+                        goes into exploring Linux, and understanding how systems
+                        behave under the hood. If it’s something I can break,
+                        tweak, or automate—I’m in. I’m currently building my
+                        skills through experiments, and a lot of hands-on
+                        learning.
+                    </p>
+                </div>
+
+                <!-- Projects Section -->
+                <div id="projects" class="section">
+                    <h1>MY_PROJECTS</h1>
+                    <div class="project">
+                        <div class="project-title">spikey_keeb</div>
+                        <div class="project-desc">
+                            A handwired keyboard with QMK firmware written in
+                            C++. Custom 3D printed case with MX blue switches
+                            and a 0.91" OLED screen. Uses RP2040.
+                        </div>
+
+                        <div class="project-title">file converter script</div>
+                        <div class="project-desc">
+                            a simple bash script to convert files from one
+                            format to another. It supports various formats such
+                            as PDF, DOCX, and more.
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-top: 20px">
+                        > I post my random projects on Reddit. (lazy to write
+                        docs)
+                    </p>
+                </div>
+
+                <!-- Links Section -->
+                <div id="links" class="section">
+                    <h1>LINKS</h1>
+                    <p style="color: #666; margin-bottom: 20px">
+                        Follow me on Reddit, I need friends to talk.
+                    </p>
+
+                    <a
+                        href="https://github.com/meowchao"
+                        target="_blank"
+                        class="link-item"
+                        >GitHub</a
+                    >
+                    <a
+                        href="https://www.linkedin.com/in/pranav-dhole-39b1b9310"
+                        target="_blank"
+                        class="link-item"
+                        >LinkedIn</a
+                    >
+                    <a
+                        href="mailto:pranavvijaydhole2006@gmail.com"
+                        class="link-item"
+                        >Email</a
+                    >
+                    <a
+                        href="https://www.reddit.com/u/PurposeAlone798"
+                        target="_blank"
+                        class="link-item"
+                        >Reddit</a
+                    >
+                    <a
+                        href="https://www.instagram.com/pranav_dhole_56"
+                        target="_blank"
+                        class="link-item"
+                        >Instagram</a
+                    >
+                </div>
+
+                <!-- Notes Section -->
+                <div id="notes" class="section">
+                    <h1>LEAVE_A_NOTE</h1>
+                    <p style="color: #666; margin-bottom: 20px">
+                        Anonymous notes welcome.
+                    </p>
+
+                    <form
+                        action="https://formspree.io/f/mrbkzpap"
+                        method="POST"
+                    >
+                        <textarea
+                            name="message"
+                            placeholder="Type your message here..."
+                            required
+                        ></textarea>
+                        <button type="submit">SEND</button>
+                    </form>
+                </div>
+
+                <!-- Blog Section -->
+                <div id="blogs" class="section">
+                    <h1>BLOGS</h1>
+                    <div class="blog-container">
+                        <div class="blog-placeholder">
+                            will write when i get a crazy idea
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-text">
+                    Press [a] [p] [l] [b] [n] to navigate • Press [q] to return
+                    home
+                </div>
+            </div>
+        </div>
+
+        <!-- Load JS Here (fixed) -->
+        <script src="script.js"></script>
+    </body>
+</html>
