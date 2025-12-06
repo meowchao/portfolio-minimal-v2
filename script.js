@@ -9,16 +9,16 @@ window.addEventListener("DOMContentLoaded", () => {
     if (index < text.length) {
       typewriterElement.textContent += text.charAt(index);
       index++;
-      setTimeout(typeWriter, 100);
+      setTimeout(typeWriter, 30);
     }
   }
 
-  setTimeout(typeWriter, 500);
+  setTimeout(typeWriter, 30);
 
   // Initialize welcome section as active after splash screen
   setTimeout(() => {
     showSection("welcome");
-  }, 3500);
+  }, 200);
 });
 
 // Show sections

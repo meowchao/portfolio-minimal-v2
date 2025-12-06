@@ -1,3 +1,4 @@
+
 <style>
             * {
                 margin: 0;
@@ -8,7 +9,7 @@
             body {
                 background-color: #000;
                 color: #fff;
-                font-family: "Courier New", monospace;
+                font-family: "Geist Mono", "Courier New", monospace;
                 font-size: 14px;
                 line-height: 1.6;
                 padding: 20px;
@@ -29,7 +30,7 @@
                 align-items: center;
                 justify-content: center;
                 z-index: 9999;
-                animation: fadeOut 0.5s ease-in-out 3s forwards;
+                animation: fadeOut 0.3s ease-in-out 1.5s forwards;
             }
 
             @keyframes fadeOut {
@@ -65,7 +66,7 @@
 
             .main-content {
                 opacity: 0;
-                animation: fadeIn 0.5s ease-in-out 3s forwards;
+                animation: fadeIn 0.3s ease-in-out 1.5s forwards;
             }
 
             @keyframes fadeIn {
@@ -132,6 +133,10 @@
 
             .nav {
                 margin: 30px 0;
+                position: sticky;
+                top: 0;
+                background-color: #000;
+                z-index: 100;
                 padding: 15px 0;
                 border-top: 1px solid #333;
                 border-bottom: 1px solid #333;
@@ -140,6 +145,7 @@
             .nav-item {
                 display: inline-block;
                 margin-right: 20px;
+                background-color: transparent;
                 cursor: pointer;
                 transition: all 0.2s;
                padding: 2px 4px;
@@ -191,15 +197,15 @@
                 color: #fff;
                 text-decoration: none;
                 margin: 10px 0;
+                padding: 2px 4px;
+                margin-left: -4px;
                 transition: all 0.2s;
+                background-color: transparent;
             }
 
             .link-item:hover {
                 background-color: #fff;
-                color: #000;
-                padding: 2px 4px;
-                margin-left: -4px;
-            }
+                color: #000;           }
 
             .link-item::before {
                 content: "> ";
@@ -212,7 +218,7 @@
                 background-color: #000;
                 color: #fff;
                 border: 1px solid #333;
-                font-family: "Courier New", monospace;
+                font-family: "Geist Mono", "Courier New", monospace;
                 font-size: 14px;
                 padding: 10px;
                 resize: vertical;
@@ -228,7 +234,7 @@
                 color: #fff;
                 border: 1px solid #fff;
                 padding: 8px 20px;
-                font-family: "Courier New", monospace;
+                font-family: "Geist Mono", "Courier New", monospace;
                 cursor: pointer;
                 margin-top: 10px;
                 transition: all 0.2s;
