@@ -319,6 +319,43 @@
                 font-style: italic;
             }
 
+            .spikey_keeb_img {
+
+                max-width: 400px;
+                width: 100%;
+                height: auto;
+                border: 1px solid #444;
+
+                margin: 20px auto;
+                display: block;
+                box-shadow: 0 0 10px #000;
+            }
+
+            .file_converter_gif {
+
+                max-width: 400px;
+                width: 100%;
+                height: auto;
+                border: 1px solid #444;
+
+                margin: 20px auto;
+                display: block;
+                box-shadow: 0 0 10px #000;
+            }
+
+            .cyberdeck-img{
+                max-width: 400px;
+                width: 100%;
+                height: auto;
+                border: 1px solid #444;
+
+                margin: 20px auto;
+                display: block;
+                box-shadow: 0 0 10px #000;
+            }
+
+
+
             @media (max-width: 768px) {
                 body {
                     padding: 10px;
