@@ -272,6 +272,12 @@
                 color: #666;
                 font-size: 12px;
                 margin-top: 30px;
+                position: sticky;
+                bottom: 0;
+                background-color: #000;
+                padding: 10px 0;
+                z-index: 90;
+                border-top: 1px solid #333;
             }
 
             /* Blog Styles */
@@ -371,5 +377,36 @@
                     display: block;
                     margin: 5px 0;
                 }
+            }
+
+            .blog-list-item {
+                margin: 15px 0;
+                display: flex;
+                align-items: baseline;
+                gap: 15px;
+            }
+
+            .blog-list-date {
+                color: #666;
+                font-size: 12px;
+                min-width: 90px;
+            }
+
+            .blog-list-link {
+                color: #fff;
+                text-decoration: none;
+                transition: all 0.2s;
+                padding: 2px 4px;
+                margin-left: -4px;
+            }
+
+            .blog-list-link:hover {
+                background-color: #fff;
+                color: #000;
+            }
+
+            .blog-list-link::before {
+                content: "> ";
+                color: #888;
             }
         </style>
