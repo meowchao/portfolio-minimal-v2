@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>headless pi on a captive portal network - spikeypear</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #000;
+                color: #fff;
+                font-family: "Geist Mono", "Courier New", monospace;
+                font-size: 14px;
+                line-height: 1.8;
+                padding: 20px;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .back-link {
+                color: #888;
+                text-decoration: none;
+                display: inline-block;
+                margin-bottom: 30px;
+                padding: 5px 10px;
+                border: 1px solid #333;
+                transition: all 0.2s;
+            }
+
+            .back-link:hover {
+                background-color: #fff;
+                color: #000;
+                border-color: #fff;
+            }
+
+            .blog-header {
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #333;
+            }
+
+            .blog-title {
+                font-size: 24px;
+                font-weight: normal;
+                margin-bottom: 10px;
+            }
+
+            .blog-date {
+                color: #666;
+                font-size: 12px;
+            }
+
+            .blog-content {
+                color: #ccc;
+            }
+
+            .blog-content h2 {
+                font-size: 18px;
+                font-weight: normal;
+                margin: 30px 0 15px 0;
+                color: #fff;
+                border-bottom: 1px solid #222;
+                padding-bottom: 10px;
+            }
+
+            .blog-content h3 {
+                font-size: 16px;
+                font-weight: normal;
+                margin: 25px 0 10px 0;
+                color: #fff;
+            }
+
+            .blog-content p {
+                margin: 15px 0;
+                line-height: 1.8;
+            }
+
+            .blog-content code {
+                background-color: #111;
+                padding: 2px 6px;
+                border: 1px solid #333;
+                font-family: "Geist Mono", "Courier New", monospace;
+                font-size: 13px;
+            }
+
+            .blog-content pre {
+                background-color: #111;
+                border: 1px solid #333;
+                padding: 15px;
+                overflow-x: auto;
+                margin: 20px 0;
+            }
+
+            .blog-content pre code {
+                background-color: transparent;
+                border: none;
+                padding: 0;
+            }
+
+            .blog-content img {
+                max-width: 100%;
+                height: auto;
+                border: 1px solid #333;
+                margin: 20px 0;
+                display: block;
+            }
+
+            .blog-content a {
+                color: #fff;
+                text-decoration: underline;
+                transition: all 0.2s;
+            }
+
+            .blog-content a:hover {
+                background-color: #fff;
+                color: #000;
+                text-decoration: none;
+            }
+
+            .blog-content ul,
+            .blog-content ol {
+                margin: 15px 0;
+                padding-left: 30px;
+            }
+
+            .blog-content li {
+                margin: 8px 0;
+            }
+
+            .blog-content blockquote {
+                border-left: 2px solid #333;
+                padding-left: 20px;
+                margin: 20px 0;
+                color: #888;
+                font-style: italic;
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding: 10px;
+                    font-size: 12px;
+                }
+
+                .blog-title {
+                    font-size: 20px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="blog-header">
+            <h1 class="blog-title">headless pi on a captive portal network</h1>
+            <div class="blog-date">April 12, 2026</div>
+        </div>
+
+        <article class="blog-content">
+            <blockquote>
+                This took a little longer to figure out than i expected for some
+                reasons (maybe lack of motivation idk).
+            </blockquote>
+
+            <p>
+                I live in a hostel. The hostel provides WiFi but it's behind a
+                captive portal meaning you connect to the network but there's no
+                internet until you open a browser, go to a login page, and enter
+                your credentials.
+            </p>
+
+            <p>
+                The problem: I have a Raspberry Pi with no screen, no keyboard,
+                no mouse. A headless setup. i know pretty cool i can't open a
+                browser on it. So how do one authenticate a captive portal on a
+                machine with no GUI?
+            </p>
+
+            <p>This is what I figured out.</p>
+
+            <h2>the setup</h2>
+
+            <p>
+                Before anything, I needed a way to SSH into the Pi without being
+                on the same network. My solutio phone hotspot as a temporary
+                bridge. I connected the Pi to my phone's hotspot, connected my
+                laptop to the same hotspot, and SSHed in. easy
+            </p>
+
+            <p>
+                But this only works when I'm physically near my phone and on the
+                same hotspot. Not ideal So installed Tailscale on both the Pi
+                and my laptop. thanks ayush for the idea (aysuh is my friend :])
+            </p>
+
+            <h3>installing tailscale</h3>
+
+            <pre><code>curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up</code></pre>
+
+            <p>
+                Running <code>tailscale up</code> prints an authentication URL.
+                Open it on any device, log in, and the Pi joins your Tailscale
+                network permanently. Now you get a
+                <code>100.x.x.x</code> address that works from anywhere in the
+                world regardless of what network the Pi is on.
+            </p>
+
+            <pre><code>tailscale ip</code></pre>
+
+            <p>
+                tailscale gives you the ip save that or its also available in
+                the tailscale dashboard
+            </p>
+
+            <pre><code>ssh spikey@raspberrypi</code></pre>
+
+            <h2>figuring out the captive portal</h2>
+
+            <p>
+                A captive portal is just a web form. When you connect to the
+                WiFi and open a browser, the network intercepts your request and
+                redirects you to a login page. You fill in credentials, hit
+                submit, and the form POSTs your data to an authentication
+                server. Once authenticated, your MAC address is whitelisted and
+                traffic flows freely.
+            </p>
+
+            <p>
+                The key insight: a browser isn't special here. Any HTTP client
+                can do the same thing. Including <code>curl</code>.
+            </p>
+
+            <h3>finding the form details</h3>
+
+            <p>
+                Connect your laptop or phone to the hostel WiFi, let the captive
+                portal page load, and inspect the HTML source. You need three
+                things:
+            </p>
+
+            <ul>
+                <li>
+                    The form's <code>action</code> attribute — this is where the
+                    POST goes
+                </li>
+                <li>
+                    The <code>name</code> attribute of the username input field
+                </li>
+                <li>
+                    The <code>name</code> attribute of the password input field
+                </li>
+                <li>
+                    Any hidden input fields — these are often required for
+                    authentication
+                </li>
+            </ul>
+
+            <p>
+                In my case, the portal was running on
+                <code>phc.prontonetworks.com</code> and the form looked like
+                this:
+            </p>
+
+            <pre><code>&lt;form action="/cgi-bin/authlogin?URI=http://detectportal.firefox.com/canonical.html" method="POST"&gt;
+  &lt;input id="userId" type="text" name="userId"&gt;
+  &lt;input id="password" type="password" name="password"&gt;
+  &lt;input type="hidden" name="serviceName" value="ProntoAuthentication"&gt;
+  &lt;button type="submit"&gt;Login&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+            <p>
+                Three fields: <code>userId</code>, <code>password</code>, and a
+                hidden field <code>serviceName</code> with value
+                <code>ProntoAuthentication</code>. That hidden field is easy to
+                miss if you only look at the visible inputs always check for
+                hidden fields.
+            </p>
+
+            <h2>replicating the login with curl</h2>
+
+            <p>
+                Once you have the form details, replicating the login is
+                straightforward:
+            </p>
+
+            <pre><code>curl -v -X POST "http://phc.prontonetworks.com/cgi-bin/authlogin?URI=http://detectportal.firefox.com/canonical.html" \
+  --data "userId=YOUR_USERNAME&password=YOUR_PASSWORD&serviceName=ProntoAuthentication" \
+  -L</code></pre>
+
+            <p>The flags:</p>
+
+            <ul>
+                <li>
+                    <code>-X POST</code> — send a POST request, same as
+                    submitting the form
+                </li>
+                <li>
+                    <code>--data</code> — the form fields as key=value pairs
+                    joined by &
+                </li>
+                <li>
+                    <code>-L</code> — follow redirects, portals redirect on
+                    successful login
+                </li>
+                <li>
+                    <code>-v</code> — verbose output so you can see what's
+                    happening
+                </li>
+            </ul>
+
+            <p>
+                A successful response returns HTTP 200 with an "Access Granted"
+                page in the body. Test it on your laptop first before putting it
+                on the Pi. After running it, try
+                <code>ping google.com</code> — if you get replies, it worked.
+            </p>
+
+            <h2>automating it on boot</h2>
+
+            <h3>the script</h3>
+
+            <pre><code>nano ~/captive_login.sh</code></pre>
+
+            <pre><code>#!/bin/bash
+sleep 20
+curl -X POST "http://phc.prontonetworks.com/cgi-bin/authlogin?URI=http://detectportal.firefox.com/canonical.html" \
+  --data "userId=YOUR_USERNAME&password=YOUR_PASSWORD&serviceName=ProntoAuthentication" \
+  -L</code></pre>
+
+            <p>
+                The <code>sleep 20</code> is important. On boot, NetworkManager
+                takes several seconds to associate with the WiFi network and get
+                an IP. If curl runs immediately, there's no network yet and the
+                login fails. 20 seconds gives enough margin.
+            </p>
+
+            <pre><code>chmod +x ~/captive_login.sh</code></pre>
+
+            <h3>scheduling with cron</h3>
+
+            <p>
+                cron is Linux's built-in task scheduler. i love linux more now
+                <code>crontab -e</code> opens your personal schedule file. Add
+                this line:
+            </p>
+
+            <pre><code>@reboot /home/spikey/captive_login.sh</code></pre>
+
+            <p>
+                <code>@reboot</code> is a special cron directive that runs the
+                command once every time the system boots. Make sure the path
+                matches your actual home directory — if your username isn't
+                <code>pi</code>, update it accordingly.
+            </p>
+
+            <h2>network fallback with networkmanager</h2>
+
+            <p>
+                This was the part where i almost lost my remote access. If the
+                Pi connects to the hostel WiFi but the captive portal login
+                fails for any reason, there's no internet, Tailscale can't reach
+                its coordination server, and you're locked out with no way to
+                SSH in remotely.
+            </p>
+
+            <p>
+                The fix: configure a fallback network. My Pi runs Debian Trixie
+                which uses NetworkManager i used <code>nmcli</code> to configure
+                my network priorities i had no idea you can do this agin i love
+                linux
+            </p>
+
+            <pre><code># Add hostel WiFi (open network, no password)
+sudo nmcli dev wifi connect "A-VIT" ifname wlan0
+
+# Add phone hotspot as fallback
+sudo nmcli dev wifi connect "YourHotspot" password "yourpassword" ifname wlan0
+
+# Set priorities — higher number = preferred
+sudo nmcli connection modify "A-VIT" connection.autoconnect-priority 10
+sudo nmcli connection modify "YourHotspot" connection.autoconnect-priority 5</code></pre>
+
+            <p>
+                Now on boot the Pi tries the hostel WiFi first. If that fails,
+                it falls back to the hotspot. Either way Tailscale comes up and
+                you can SSH in to debug.
+            </p>
+
+            <p>
+                Captive portals are dumb like me. They're just HTML forms,
+                automating them is a straightforward curl command and a cron
+                job. The harder problem is making sure you never lose remote
+                access in the process which i almost lost which comes down to
+                always having a fallback network configured before making
+                changes.
+            </p>
+
+            <p>
+                The Pi now boots, authenticates itself, and comes online without
+                any manual intervention. I can SSH into it from anywhere via
+                Tailscale. No screen, no keyboard, no mouse needed. YAY !!
+            </p>
+
+            <p>
+                if you have any ideas what further can be done do let me know.
+            </p>
+
+            <!-- eof -->
+        </article>
+
+        <a href="../index.html" class="back-link" style="margin-top: 40px"
+            >back to home</a
+        >
+    </body>
+</html>
