@@ -1,0 +1,51 @@
+name: gallery
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gallery
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pillow requests
+
+      - name: Poll Telegram
+        id: poll
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          ALLOWED_USER_ID: ${{ secrets.ALLOWED_USER_ID }}
+        run: python scripts/gallery_poll.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "gallery-bot"
+          git config user.email "gallery-bot@users.noreply.github.com"
+          git add gallery
+          if ! git diff --cached --quiet; then
+            git commit -m "gallery: update"
+            git pull --rebase
+            git push
+          fi
+
+      # Ack only after the push succeeded, so a failed run retries the same updates.
+      - name: Ack updates
+        if: steps.poll.outputs.ack_offset != ''
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          curl -fsS "https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${{ steps.poll.outputs.ack_offset }}&timeout=0" > /dev/null

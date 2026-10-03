@@ -1,0 +1,86 @@
+/* clicks / gallery — kept separate from style.css on purpose */
+.clicks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.click-item {
+    border: 1px solid #333;
+    padding: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.click-item:hover {
+    border-color: #fff;
+}
+
+.click-item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: #111;
+}
+
+.click-meta {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.click-date {
+    color: #666;
+}
+
+.clicks-empty {
+    color: #666;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.94);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 80vh;
+    border: 1px solid #444;
+}
+
+.lightbox-caption {
+    margin-top: 12px;
+    max-width: 700px;
+    color: #ccc;
+    text-align: center;
+}
+
+.lightbox-date {
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .clicks-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}

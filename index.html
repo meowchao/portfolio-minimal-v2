@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="gallery.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap"
             rel="stylesheet"
@@ -41,6 +42,9 @@
                     >
                     <span class="nav-item" onclick="showSection('blogs')"
                         >[b] blogs</span
+                    >
+                    <span class="nav-item" onclick="showSection('clicks')"
+                        >[c] clicks</span
                     >
                     <span class="nav-item" onclick="showSection('notes')"
                         >[n] leave note</span
@@ -207,6 +211,15 @@
                     >
                 </div>
 
+                <!-- Clicks Section -->
+                <div id="clicks" class="section">
+                    <h1>RANDOM_CLICKS</h1>
+                    <p style="color: #666; margin-bottom: 20px">
+                        stuff i photographed. click to enlarge.
+                    </p>
+                    <div id="clicks-grid" class="clicks-grid"></div>
+                </div>
+
                 <!-- Notes Section -->
                 <div id="notes" class="section">
                     <h1>LEAVE_A_NOTE</h1>
@@ -257,7 +270,7 @@
                 </div>
 
                 <div class="help-text">
-                    Press [a] [p] [l] [b] [n] to navigate • Press [q] to return
+                    Press [a] [p] [l] [b] [c] [n] to navigate • Press [q] to return
                     home
                 </div>
             </div>
@@ -265,5 +278,6 @@
 
         <!-- Load JS Here (fixed) -->
         <script src="script.js"></script>
+        <script src="gallery.js"></script>
     </body>
 </html>

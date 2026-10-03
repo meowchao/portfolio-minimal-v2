@@ -42,8 +42,9 @@ function showSection(sectionId) {
     projects: 1, // [p] projects
     links: 2, // [l] links
     blogs: 3, // [b] blogs
-    notes: 4, // [n] leave note
-    welcome: 5, // [q] home
+    clicks: 4, // [c] clicks
+    notes: 5, // [n] leave note
+    welcome: 6, // [q] home
   };
 
   // Add active class to the correct nav item
@@ -65,6 +66,7 @@ document.addEventListener("keydown", (e) => {
     p: "projects",
     l: "links",
     b: "blogs",
+    c: "clicks",
     n: "notes",
     q: "welcome",
   };
